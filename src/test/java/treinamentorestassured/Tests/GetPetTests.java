@@ -5,6 +5,7 @@ import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class GetPetTests {
     String URL = "https://petstore.swagger.io/v2";
@@ -32,7 +33,8 @@ public class GetPetTests {
                 .when()
                 .get()
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("status[0]",equalTo("pending"));
 
     }
 
@@ -48,5 +50,6 @@ public class GetPetTests {
                 .post()
                 .then()
                 .statusCode(405);
+
     }
 }
